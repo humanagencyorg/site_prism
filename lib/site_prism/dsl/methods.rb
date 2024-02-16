@@ -91,6 +91,7 @@ module SitePrism
               within_frame(*scope_find_args) { block.call(klass.new) }
             rescue Selenium::WebDriver::Error::NoSuchWindowError
               retry if (retries += 1) < 4 # try 4 times
+            end
           end
         end
       end
