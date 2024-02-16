@@ -81,6 +81,7 @@ module SitePrism
 
       def iframe(name, klass, *args)
         MAX_RETRIES = 4
+        retries = 0
         raise_if_build_time_block_supplied(self, name, block_given?, :elements)
         element_find_args = deduce_iframe_element_find_args(args)
         scope_find_args = deduce_iframe_scope_find_args(args)
