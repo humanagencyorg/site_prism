@@ -80,7 +80,6 @@ module SitePrism
       end
 
       def iframe(name, klass, *args)
-        MAX_RETRIES = 4
         retries = 0
         raise_if_build_time_block_supplied(self, name, block_given?, :elements)
         element_find_args = deduce_iframe_element_find_args(args)
@@ -92,7 +91,7 @@ module SitePrism
             begin
               within_frame(*scope_find_args) { block.call(klass.new) }
             rescue Selenium::WebDriver::Error::NoSuchWindowError
-              retry if (retries += 1) < MAX_RETRIES
+              retry if (retries += 1) < 4 # try 4 times
           end
         end
       end
